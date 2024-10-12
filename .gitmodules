@@ -1,0 +1,4 @@
+[submodule "whisper"]
+	path = whisper
+	url = https://github.com/eustlb/whisper.git
+	branch = transcribe-from-mel-spectrogram
