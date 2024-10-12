@@ -11,7 +11,7 @@ from transformers import WhisperProcessor
 import numpy as np
 from datasets import load_dataset, Audio
 
-transformers_model_id = "openai/whisper-tiny"
+transformers_model_id = "openai/whisper-tiny.en"
 torch_device = "cuda:0" if torch.cuda.is_available() else "cpu"
 torch_dtype = torch.float32
 
