@@ -19,7 +19,7 @@ torch_dtype = torch.float32
 
 # ====================================================================================================
 # LOAD DATA AND BUILD INPUT FEATURES AS IN THE ORIGINAL TEST 
-processor = WhisperProcessor.from_pretrained("openai/whisper-tiny.en")
+processor = WhisperProcessor.from_pretrained(transformers_model_id)
 ds = load_dataset("distil-whisper/meanwhile", "default")["test"]
 dataset = ds.cast_column("audio", Audio(sampling_rate=16000))
 
