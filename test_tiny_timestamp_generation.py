@@ -12,6 +12,8 @@ import numpy as np
 from datasets import load_dataset
 
 transformers_model_id = "openai/whisper-tiny"
+openai_model_id = "tiny"
+
 torch_device = "cuda:0" if torch.cuda.is_available() else "cpu"
 torch_dtype = torch.float32
 
@@ -30,7 +32,6 @@ input_features = processor(
 input_features = input_features.to(torch_device, dtype=torch_dtype)
 #====================================================================================================
 
-openai_model_id = "tiny"
 openai_model = whisper.load_model(openai_model_id)
 
 openai_gen_kwargs = {
