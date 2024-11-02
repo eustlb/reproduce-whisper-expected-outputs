@@ -7,14 +7,15 @@ sys.path.insert(0, os.path.join(current_dir,'whisper'))
 
 import whisper
 import torch
-from transformers import WhisperProcessor
+from transformers import WhisperProcessor, set_seed
 import numpy as np
 from datasets import load_dataset, Audio
 
 transformers_model_id = "openai/whisper-tiny"
 openai_model_id = "tiny"
 
-torch_device = "cuda:0" if torch.cuda.is_available() else "cpu"
+torch_device = "cpu"
+set_seed(0)
 torch_dtype = torch.float32
 
 # ====================================================================================================
