@@ -48,10 +48,6 @@ openai_outputs = openai_model.transcribe(
 tokens = [torch.tensor(seg['tokens']) for seg in openai_outputs['segments']]
 tokens = torch.cat(tokens, dim=0)
 
-# we need to add decoder input token ids and eos token id
-decoder_input_tokens = torch.tensor([50258, 50259, 50359,])
-eos_token = torch.tensor([50257])
-tokens = torch.cat([decoder_input_tokens, tokens, eos_token], dim=0)
 
 print(f"EXPECTED_OUTPUT: {tokens}")
 
