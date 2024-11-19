@@ -36,7 +36,7 @@ input_features = input_features.to(torch_device, dtype=torch_dtype)
 openai_model = whisper.load_model(openai_model_id)
 
 openai_gen_kwargs = {
-    "condition_on_previous_text": False,
+    "condition_on_previous_text": True,
     "fp16": False,
     "without_timestamps": False,
 }
@@ -48,11 +48,6 @@ openai_outputs = openai_model.transcribe(
 
 tokens = [torch.tensor(seg['tokens']) for seg in openai_outputs['segments']]
 tokens = torch.cat(tokens, dim=0)
-
-# we need to add decoder input token ids and eos token id
-decoder_input_tokens = torch.tensor([50258, 50259, 50360,])
-eos_token = torch.tensor([50257])
-tokens = torch.cat([decoder_input_tokens, tokens, eos_token], dim=0)
 
 print(f"EXPECTED_OUTPUT: {tokens}")
 
@@ -67,4 +62,4 @@ except:
 print(f"is correct ? {is_correct}")
 
 for seg in openai_outputs['segments']:
-    print(f"start: {seg['start']}, end: {seg['end']}, text: {seg['text']}")
+    print(f"start: {seg['start']}, end: {seg['end']}, text: {processor.decode(seg['tokens'], decode_with_timestamps=True)}")
